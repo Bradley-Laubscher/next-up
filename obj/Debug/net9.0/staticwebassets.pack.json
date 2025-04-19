@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "D:\\Documents\\Programming\\Projects\\.NET\\GameBacklogManager\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\GameBacklogManager.bundle.scp.css",
-      "PackagePath": "staticwebassets\\GameBacklogManager.mvtfx2dikc.bundle.scp.css"
+      "Id": "D:\\Documents\\Programming\\Projects\\.NET\\GameBacklogManager\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\NextUp.bundle.scp.css",
+      "PackagePath": "staticwebassets\\NextUp.xbvibf134r.bundle.scp.css"
     },
     {
       "Id": "D:\\Documents\\Programming\\Projects\\.NET\\GameBacklogManager\\wwwroot\\css\\site.css",
@@ -257,24 +257,24 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.GameBacklogManager.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.NextUp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.GameBacklogManager.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.NextUp.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.GameBacklogManager.props",
-      "PackagePath": "build\\GameBacklogManager.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.NextUp.props",
+      "PackagePath": "build\\NextUp.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.GameBacklogManager.props",
-      "PackagePath": "buildMultiTargeting\\GameBacklogManager.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.NextUp.props",
+      "PackagePath": "buildMultiTargeting\\NextUp.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.GameBacklogManager.props",
-      "PackagePath": "buildTransitive\\GameBacklogManager.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.NextUp.props",
+      "PackagePath": "buildTransitive\\NextUp.props"
     }
   ],
   "ElementsToRemove": []

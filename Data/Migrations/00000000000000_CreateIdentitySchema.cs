@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GameBacklogManager.Data.Migrations
+namespace NextUp.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

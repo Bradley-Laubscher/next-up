@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameBacklogManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0b9eb8aaa9a8e775e1a14b189ef9fc1cc238252")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e732f1bd2ac399d364e965e9965285db500109a")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameBacklogManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameBacklogManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

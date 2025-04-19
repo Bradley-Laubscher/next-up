@@ -1,4 +1,4 @@
-namespace GameBacklogManager.Models
+namespace NextUp.Models
 {
 	public class ErrorViewModel
 	{

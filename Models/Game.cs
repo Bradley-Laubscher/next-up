@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GameBacklogManager.Models
+namespace NextUp.Models
 {
     public class Game
     {

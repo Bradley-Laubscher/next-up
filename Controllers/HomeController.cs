@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using GameBacklogManager.Models;
+using NextUp.Models;
 
-namespace GameBacklogManager.Controllers;
+namespace NextUp.Controllers;
 
 public class HomeController : Controller
 {

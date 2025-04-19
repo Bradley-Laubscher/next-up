@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using GameBacklogManager.Models;
+using NextUp.Models;
 
-namespace GameBacklogManager.Data;
+namespace NextUp.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {

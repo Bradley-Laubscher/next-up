@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GameBacklogManager.Data;
-using GameBacklogManager.Models;
+using NextUp.Data;
+using NextUp.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace GameBacklogManager.Controllers
+namespace NextUp.Controllers
 {
+    [Authorize]
     public class GamesController : Controller
     {
         private readonly ApplicationDbContext _context;

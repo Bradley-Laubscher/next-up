@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace GameBacklogManager.Data.Migrations
+namespace NextUp.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
