@@ -1,0 +1,26 @@
+@model IEnumerable<GameBacklogManager.Models.Game>
+
+    <h2>My Game Backlog</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Platform</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var game in Model)
+{
+            <tr>
+                <td>@game.Title</td>
+                <td>@game.Platform</td>
+                <td>@game.Status</td>
+            </tr>
+}
+        </tbody>
+    </table>
+
+    <a href="/Games/Create" class="btn btn-primary">Add New Game</a>
