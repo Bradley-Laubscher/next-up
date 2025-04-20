@@ -23,13 +23,17 @@ namespace NextUp.Services
 
         public async Task<List<Game>> FetchUpcomingGamesAsync()
         {
-            var igdbGames = await FetchGamesAsync("first_release_date > " + ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds() + "; sort first_release_date asc;");
+            // fetch hyped games coming soon
+            var igdbGames = await FetchGamesAsync("hypes; where first_release_date > " + ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds() +
+                "& hypes != null & hypes > 20; sort first_release_date asc;");
             return MapToGames(igdbGames);
         }
 
         public async Task<List<Game>> FetchNewReleasesAsync()
         {
-            var igdbGames = await FetchGamesAsync("first_release_date <= " + ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds() + "; sort first_release_date desc;");
+            // fetch newly released games with a total rating > 70
+            var igdbGames = await FetchGamesAsync("total_rating; where first_release_date <= " + ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds() +
+                "& total_rating > 70; sort first_release_date desc;");
             return MapToGames(igdbGames);
         }
 
@@ -42,7 +46,7 @@ namespace NextUp.Services
             _httpClient.DefaultRequestHeaders.Add("Client-ID", clientId);
             _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
 
-            var query = $"fields name,first_release_date,cover.url,platforms.name; where {whereClause} limit 10;";
+            var query = $"fields name,first_release_date,cover.url,platforms.name; {whereClause} limit 10;";
             var content = new StringContent(query, Encoding.UTF8, "text/plain");
 
             var response = await _httpClient.PostAsync("https://api.igdb.com/v4/games", content);
