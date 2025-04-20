@@ -21,6 +21,18 @@ namespace NextUp.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public async Task<List<Game>> SearchGamesAsync(string gameTitle)
+        {
+            // fetch game being searched for
+            if (string.IsNullOrWhiteSpace(gameTitle))
+            {
+                return new List<Game>();
+            }
+            var escapedTitle = gameTitle.Replace("\"", "");
+            var igdbGames = await FetchGamesAsync($"search \"{escapedTitle}\"; where version_parent = null;");
+            return MapToGames(igdbGames);
+        }
+
         public async Task<List<Game>> FetchUpcomingGamesAsync()
         {
             // fetch hyped games coming soon

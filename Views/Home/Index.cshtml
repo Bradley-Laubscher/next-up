@@ -10,6 +10,29 @@
     <link rel="stylesheet" type="text/css" href="~/css/home.css" />
 </head>
 <body>
+    <!-- Search Bar Section -->
+    <div class="container mt-4">
+        <form class="d-flex" method="get" asp-controller="Home" asp-action="Search">
+            <input class="form-control me-2" type="search" placeholder="Search for a game" aria-label="Search" name="searchQuery" />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Search Results Section -->
+    @if (Model.SearchResults != null && Model.SearchResults.Any())
+    {
+        <section class="section search-results-section">
+            <h2 class="section-title">Search Results</h2>
+            <div class="game-grid">
+                @foreach (var game in Model.SearchResults)
+                {
+                    @await Html.PartialAsync("Games", game)
+                }
+            </div>
+        </section>
+    }
+
+    <!-- New Releases Section -->
     <section class="section new-releases-section">
         <h2 class="section-title">New Releases</h2>
         <div class="game-grid">
@@ -27,6 +50,7 @@
         </div>
     </section>
 
+    <!-- Coming Soon Section -->
     <section class="section coming-soon-section">
         <h2 class="section-title">Coming Soon</h2>
         <div class="game-grid">

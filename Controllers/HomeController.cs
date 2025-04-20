@@ -41,4 +41,25 @@ public class HomeController : Controller
 
         return View(viewModel);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Search(string searchQuery)
+    {
+        var viewModel = new HomeViewModel()
+        {
+            SearchResults = new List<Game>(),
+            NewReleases = new List<Game>(),
+            ComingSoon = new List<Game>()
+        };
+
+        var searchResults = await _igdbService.SearchGamesAsync(searchQuery);
+        var newReleases = await _igdbService.FetchNewReleasesAsync();
+        var comingSoon = await _igdbService.FetchUpcomingGamesAsync();
+
+        viewModel.SearchResults = searchResults;
+        viewModel.NewReleases = newReleases;
+        viewModel.ComingSoon = comingSoon;
+
+        return View("Index", viewModel);
+    }
 }
