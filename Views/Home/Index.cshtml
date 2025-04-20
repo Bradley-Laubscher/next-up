@@ -1,4 +1,5 @@
 ﻿@model HomeViewModel
+@using System.Linq
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,64 +10,38 @@
     <link rel="stylesheet" type="text/css" href="~/css/home.css" />
 </head>
 <body>
-
-    <h2>New Releases</h2>
-    <div class="new-releases">
-        @if (Model.NewReleases != null && Model.NewReleases.Any())
-        {
-            foreach (var game in Model.NewReleases)
+    <section class="section new-releases-section">
+        <h2 class="section-title">New Releases</h2>
+        <div class="game-grid">
+            @if (Model.NewReleases != null && Model.NewReleases.Any())
             {
-                <div class="game">
-                    <img src="@game.CoverImageUrl"
-                         alt="@game.Title"
-                         onerror="this.onerror=null;this.src='@Url.Content("~/images/no_cover_available.png")';" />
-                    <h3>@game.Title</h3>
-                    <p>Release Date: @(game.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "TBA")</p>
-                    <form asp-controller="Games" asp-action="AddToList" method="post">
-                        <input type="hidden" name="Title" value="@game.Title" />
-                        <input type="hidden" name="CoverImageUrl" value="@game.CoverImageUrl" />
-                        <input type="hidden" name="Platform" value="@game.Platform" />
-                        <input type="hidden" name="ReleaseDate" value="@game.ReleaseDate?.ToString("o")" />
-
-                        <button type="submit" class="btn btn-primary">Add to My List</button>
-                    </form>
-                </div>
+                foreach (var game in Model.NewReleases)
+                {
+                    @await Html.PartialAsync("Games", game)
+                }
             }
-        }
-        else
-        {
-            <p>No new releases found.</p>
-        }       
-    </div>
-
-    <h2>Coming Soon</h2>
-    <div class="coming-soon">
-        @if (Model.NewReleases != null && Model.NewReleases.Any())
-        {
-            foreach (var game in Model.ComingSoon)
+            else
             {
-                <div class="game">
-                    <img src="@game.CoverImageUrl"
-                         alt="@game.Title"
-                         onerror="this.onerror=null;this.src='@Url.Content("~/images/no_cover_available.png")';" />
-                    <h3>@game.Title</h3>
-                    <p>Release Date: @(game.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "TBA")</p>
-                    <form asp-controller="Games" asp-action="AddToList" method="post">
-                        <input type="hidden" name="Title" value="@game.Title" />
-                        <input type="hidden" name="CoverImageUrl" value="@game.CoverImageUrl" />
-                        <input type="hidden" name="Platform" value="@game.Platform" />
-                        <input type="hidden" name="ReleaseDate" value="@game.ReleaseDate?.ToString("o")" />
-
-                        <button type="submit" class="btn btn-primary">Add to My List</button>
-                    </form>
-                </div>
+                <p>No new releases found.</p>
             }
-        }
-        else
-        {
-            <p>No games coming soon.</p>
-        }
-    </div>
+        </div>
+    </section>
 
+    <section class="section coming-soon-section">
+        <h2 class="section-title">Coming Soon</h2>
+        <div class="game-grid">
+            @if (Model.ComingSoon != null && Model.ComingSoon.Any())
+            {
+                foreach (var game in Model.ComingSoon)
+                {
+                    @await Html.PartialAsync("Games", game)
+                }
+            }
+            else
+            {
+                <p>No games coming soon.</p>
+            }
+        </div>
+    </section>
 </body>
 </html>

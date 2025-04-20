@@ -1,0 +1,19 @@
+﻿@model Game
+
+<div class="game-card d-flex flex-column justify-content-between">
+    <div class="game-info">
+        <img src="@Model.CoverImageUrl"
+             alt="@Model.Title"
+             onerror="this.onerror=null;this.src='@Url.Content("~/images/no_cover_available.png")';" />
+        <h3>@Model.Title</h3>
+        <p>Release Date: @(Model.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "TBA")</p>
+    </div>
+
+    <form asp-controller="Games" asp-action="AddToList" method="post" class="mt-auto">
+        <input type="hidden" name="Title" value="@Model.Title" />
+        <input type="hidden" name="CoverImageUrl" value="@Model.CoverImageUrl" />
+        <input type="hidden" name="Platform" value="@Model.Platform" />
+        <input type="hidden" name="ReleaseDate" value="@Model.ReleaseDate?.ToString("o")" />
+        <button type="submit" class="btn btn-primary w-100">Add to My List</button>
+    </form>
+</div>
