@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7q5cAS4MMTQ=",
+  "dgSpecHash": "Ur0M47KOC+Q=",
   "success": true,
-  "projectFilePath": "D:\\Documents\\Programming\\Projects\\.NET\\GameBacklogManager\\NextUp.csproj",
+  "projectFilePath": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\NextUp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Bradley\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Bradley\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

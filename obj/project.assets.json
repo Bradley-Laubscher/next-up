@@ -7021,11 +7021,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\Programming\\Projects\\.NET\\GameBacklogManager\\NextUp.csproj",
+      "projectUniqueName": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\NextUp.csproj",
       "projectName": "NextUp",
-      "projectPath": "D:\\Documents\\Programming\\Projects\\.NET\\GameBacklogManager\\NextUp.csproj",
+      "projectPath": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\NextUp.csproj",
       "packagesPath": "C:\\Users\\Bradley\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\Programming\\Projects\\.NET\\GameBacklogManager\\obj\\",
+      "outputPath": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
