@@ -14,9 +14,9 @@ namespace NextUp.Models
 
         public required string Platform { get; set; }
 
-        public required string Genre { get; set; }
+        public string? Genre { get; set; }
 
-        public required string Description { get; set; }
+        public string? Description { get; set; }
 
         public DateTime? ReleaseDate { get; set; }
 

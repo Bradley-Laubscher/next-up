@@ -1,0 +1,11 @@
+﻿.game {
+    display: inline-block;
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+}
+
+    .game img {
+        width: 100%;
+        height: auto;
+    }

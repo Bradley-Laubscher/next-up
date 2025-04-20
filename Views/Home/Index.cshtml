@@ -1,35 +1,68 @@
-﻿@model NextUp.Models.HomeViewModel
+﻿@model HomeViewModel
 
-<h2 class="mb-4">New Releases</h2>
-<div class="row">
-    @foreach (var game in Model.NewReleases)
-    {
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <img src="@game.CoverImageUrl" class="card-img-top" alt="@game.Title">
-                <div class="card-body">
-                    <h5 class="card-title">@game.Title</h5>
-                    <p class="card-text">@game.Platform</p>
-                    <p class="card-text"><small class="text-muted">Released: @game.ReleaseDate?.ToString("MMMM dd, yyyy")</small></p>
-                </div>
-            </div>
-        </div>
-    }
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Up - Home</title>
+    <link rel="stylesheet" type="text/css" href="~/css/home.css" />
+</head>
+<body>
 
-<h2 class="mt-5 mb-4">Coming Soon</h2>
-<div class="row">
-    @foreach (var game in Model.ComingSoon)
-    {
-        <div class="col-md-4 mb-3">
-            <div class="card h-100">
-                <img src="@game.CoverImageUrl" class="card-img-top" alt="@game.Title">
-                <div class="card-body">
-                    <h5 class="card-title">@game.Title</h5>
-                    <p class="card-text">@game.Platform</p>
-                    <p class="card-text"><small class="text-muted">Release Date: @game.ReleaseDate?.ToString("MMMM dd, yyyy")</small></p>
+    <h2>New Releases</h2>
+    <div class="new-releases">
+        @if (Model.NewReleases != null && Model.NewReleases.Any())
+        {
+            foreach (var game in Model.NewReleases)
+            {
+                <div class="game">
+                    <img src="@game.CoverImageUrl" alt="@game.Title" />
+                    <h3>@game.Title</h3>
+                    <p>Release Date: @(game.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "TBA")</p>
+                    <form asp-controller="Games" asp-action="AddToList" method="post">
+                        <input type="hidden" name="Title" value="@game.Title" />
+                        <input type="hidden" name="CoverImageUrl" value="@game.CoverImageUrl" />
+                        <input type="hidden" name="Platform" value="@game.Platform" />
+                        <input type="hidden" name="ReleaseDate" value="@game.ReleaseDate?.ToString("o")" />
+
+                        <button type="submit" class="btn btn-primary">Add to My List</button>
+                    </form>
                 </div>
-            </div>
-        </div>
-    }
-</div>
+            }
+        }
+        else
+        {
+            <p>No new releases found.</p>
+        }       
+    </div>
+
+    <h2>Coming Soon</h2>
+    <div class="coming-soon">
+        @if (Model.NewReleases != null && Model.NewReleases.Any())
+        {
+            foreach (var game in Model.ComingSoon)
+            {
+                <div class="game">
+                    <img src="@game.CoverImageUrl" alt="@game.Title" />
+                    <h3>@game.Title</h3>
+                    <p>Release Date: @(game.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "TBA")</p>
+                    <form asp-controller="Games" asp-action="AddToList" method="post">
+                        <input type="hidden" name="Title" value="@game.Title" />
+                        <input type="hidden" name="CoverImageUrl" value="@game.CoverImageUrl" />
+                        <input type="hidden" name="Platform" value="@game.Platform" />
+                        <input type="hidden" name="ReleaseDate" value="@game.ReleaseDate?.ToString("o")" />
+
+                        <button type="submit" class="btn btn-primary">Add to My List</button>
+                    </form>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No games coming soon.</p>
+        }
+    </div>
+
+</body>
+</html>

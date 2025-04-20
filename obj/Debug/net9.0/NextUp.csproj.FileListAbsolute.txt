@@ -742,6 +742,7 @@ D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\a3ygkw
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\nezrqnk58p-muycvpuwrr.gz
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
+D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\a82kdcxn5x-41c7nya040.gz
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\mgq7m6my4h-su4n4czzky.gz
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\j139iec16a-61n19gt1b8.gz
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\compressed\4pyfxjkol5-xtxxf3hu2r.gz
@@ -815,10 +816,10 @@ D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\staticwebassets\m
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.NextUp.props
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.NextUp.props
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\staticwebassets.pack.json
+D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\NextUp.csproj.Up2Date
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\NextUp.dll
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\refint\NextUp.dll
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\NextUp.pdb
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\NextUp.genruntimeconfig.cache
 D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\ref\NextUp.dll
-D:\Documents\Programming\Projects\.NET\NextUp\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

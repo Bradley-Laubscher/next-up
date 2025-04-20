@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hIJX7ltxQrELtACx1oKgIeh9GaYPmLitWF0kFP1Poi4=",
+  "Hash": "yZc44yDDncvCmhZnpemhVFg3Jh/HAkhR/6fO4LW6r4w=",
   "Source": "NextUp",
   "BasePath": "_content/NextUp",
   "Mode": "Default",
@@ -1968,6 +1968,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Bradley\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\9.0.4\\staticwebassets\\V5\\lib\\jquery\\dist\\jquery.slim.js"
+    },
+    {
+      "Identity": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\compressed\\a82kdcxn5x-41c7nya040.gz",
+      "SourceId": "NextUp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/NextUp",
+      "RelativePath": "css/home#[.{fingerprint=41c7nya040}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\wwwroot\\css\\home.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "qp8gae6vam",
+      "Integrity": "4g1ZhnDmdDuOlUsNFg+NcIeM3RoGV1rfaWdQogJwqag=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\wwwroot\\css\\home.css"
     },
     {
       "Identity": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\compressed\\ajoqizozpi-jj8uyg4cgr.gz",
@@ -4028,6 +4049,27 @@
       "OriginalItemSpec": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\NextUp.bundle.scp.css"
     },
     {
+      "Identity": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\wwwroot\\css\\home.css",
+      "SourceId": "NextUp",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\wwwroot\\",
+      "BasePath": "_content/NextUp",
+      "RelativePath": "css/home#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "41c7nya040",
+      "Integrity": "qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\home.css"
+    },
+    {
       "Identity": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\wwwroot\\css\\site.css",
       "SourceId": "NextUp",
       "SourceType": "Discovered",
@@ -5352,6 +5394,304 @@
     }
   ],
   "Endpoints": [
+    {
+      "Route": "css/home.41c7nya040.css",
+      "AssetFile": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\compressed\\a82kdcxn5x-41c7nya040.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.007142857143"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "139"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4g1ZhnDmdDuOlUsNFg+NcIeM3RoGV1rfaWdQogJwqag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 08:19:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "41c7nya040"
+        },
+        {
+          "Name": "label",
+          "Value": "css/home.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/home.41c7nya040.css",
+      "AssetFile": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\wwwroot\\css\\home.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "177"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 08:19:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "41c7nya040"
+        },
+        {
+          "Name": "label",
+          "Value": "css/home.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/home.41c7nya040.css.gz",
+      "AssetFile": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\compressed\\a82kdcxn5x-41c7nya040.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "139"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4g1ZhnDmdDuOlUsNFg+NcIeM3RoGV1rfaWdQogJwqag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 08:19:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "41c7nya040"
+        },
+        {
+          "Name": "label",
+          "Value": "css/home.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4g1ZhnDmdDuOlUsNFg+NcIeM3RoGV1rfaWdQogJwqag="
+        }
+      ]
+    },
+    {
+      "Route": "css/home.css",
+      "AssetFile": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\compressed\\a82kdcxn5x-41c7nya040.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.007142857143"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "139"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4g1ZhnDmdDuOlUsNFg+NcIeM3RoGV1rfaWdQogJwqag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 08:19:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/home.css",
+      "AssetFile": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\wwwroot\\css\\home.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "177"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 08:19:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qBdXPi0vqyJUL2+afZHEKeSbBqkRwlN5hzgDNgSgYIQ="
+        }
+      ]
+    },
+    {
+      "Route": "css/home.css.gz",
+      "AssetFile": "D:\\Documents\\Programming\\Projects\\.NET\\NextUp\\obj\\Debug\\net9.0\\compressed\\a82kdcxn5x-41c7nya040.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "139"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4g1ZhnDmdDuOlUsNFg+NcIeM3RoGV1rfaWdQogJwqag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 08:19:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4g1ZhnDmdDuOlUsNFg+NcIeM3RoGV1rfaWdQogJwqag="
+        }
+      ]
+    },
     {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\Bradley\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\9.0.4\\staticwebassets\\css\\site.css",
@@ -34797,7 +35137,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34850,7 +35190,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34887,7 +35227,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34934,7 +35274,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34987,7 +35327,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35024,7 +35364,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35071,7 +35411,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35132,7 +35472,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35177,7 +35517,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35232,7 +35572,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35293,7 +35633,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35338,7 +35678,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 07:00:40 GMT"
+          "Value": "Sun, 20 Apr 2025 09:25:54 GMT"
         },
         {
           "Name": "Cache-Control",

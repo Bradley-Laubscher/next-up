@@ -15,6 +15,7 @@ D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\boo
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\jquery\dist\jquery.slim.min.map
+D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\css\home.css
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
@@ -60,6 +61,7 @@ D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\boo
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\jquery\LICENSE.txt
 D:\Documents\Programming\Projects\.NET\NextUp\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+wwwroot\css\home.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js

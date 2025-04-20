@@ -1,46 +1,44 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using NextUp.Data;
 using NextUp.Models;
+using NextUp.Services;
 
 namespace NextUp.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IgdbService _igdbService;
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+    public HomeController(IgdbService igdbService, ILogger<HomeController> logger)
     {
-        _context = context;
+        _igdbService = igdbService;
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var currentDate = DateTime.Now;
-
-        var viewModel = new HomeViewModel
+        var viewModel = new HomeViewModel()
         {
-            NewReleases = _context.Games
-                .Where(g => g.ReleaseDate != null && g.ReleaseDate <= currentDate)
-                .OrderByDescending(g => g.ReleaseDate)
-                .Take(5)
-            .ToList(),
-
-            ComingSoon = _context.Games
-                .Where(g => g.ReleaseDate != null && g.ReleaseDate > currentDate)
-                .OrderBy(g => g.ReleaseDate)
-                .Take(5)
-                .ToList()
+            NewReleases = new List<Game>(),
+            ComingSoon = new List<Game>()
         };
 
-        return View(viewModel);
-    }
+        try
+        {
+            // Fetch upcoming games and new releases from IGDB API
+            var upcomingGames = await _igdbService.FetchUpcomingGamesAsync();
+            var newReleases = await _igdbService.FetchNewReleasesAsync();
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Add them to the ViewModel
+            viewModel.ComingSoon = upcomingGames;
+            viewModel.NewReleases = newReleases;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("An error occurred while fetching IGDB data: " + ex.Message);
+            // Handle error (optional)
+        }
+
+        return View(viewModel);
     }
 }
