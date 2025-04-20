@@ -25,3 +25,58 @@ html {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Navbar styling */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    margin-right: 20px;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 15px;
+}
+
+/* Button styling */
+.btn-outline-light {
+    border: 2px solid #ffffff;
+    transition: all 0.3s;
+}
+
+    .btn-outline-light:hover {
+        background-color: #ffffff;
+        color: #343a40;
+    }
+
+/* Footer styling */
+footer {
+    background-color: #f8f9fa;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+    footer .container {
+        text-align: center;
+    }
+
+.footer-text {
+    color: #6c757d;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 767px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+    }
+}
