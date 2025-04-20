@@ -17,7 +17,9 @@
             foreach (var game in Model.NewReleases)
             {
                 <div class="game">
-                    <img src="@game.CoverImageUrl" alt="@game.Title" />
+                    <img src="@game.CoverImageUrl"
+                         alt="@game.Title"
+                         onerror="this.onerror=null;this.src='@Url.Content("~/images/no_cover_available.png")';" />
                     <h3>@game.Title</h3>
                     <p>Release Date: @(game.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "TBA")</p>
                     <form asp-controller="Games" asp-action="AddToList" method="post">
@@ -44,7 +46,9 @@
             foreach (var game in Model.ComingSoon)
             {
                 <div class="game">
-                    <img src="@game.CoverImageUrl" alt="@game.Title" />
+                    <img src="@game.CoverImageUrl"
+                         alt="@game.Title"
+                         onerror="this.onerror=null;this.src='@Url.Content("~/images/no_cover_available.png")';" />
                     <h3>@game.Title</h3>
                     <p>Release Date: @(game.ReleaseDate?.ToString("MMMM dd, yyyy") ?? "TBA")</p>
                     <form asp-controller="Games" asp-action="AddToList" method="post">
