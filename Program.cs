@@ -1,8 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using NextUp.Data;
 using NextUp.Models;
+using NextUp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
+var clientId = config["IGDB:ClientId"];
+var clientSecret = config["IGDB:ClientSecret"];
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -17,6 +21,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<IgdbAuthService>();
+builder.Services.AddHttpClient<IgdbService>();
 
 var app = builder.Build();
 
