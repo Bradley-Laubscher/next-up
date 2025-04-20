@@ -1,1 +1,39 @@
+# Build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.gz
+
+# ASP.NET static web assets
+*.staticwebassets*.json
+*.sourcelink.json
+*.txt
+
+# User secrets, database files
+*.db
+*.db-shm
+*.db-wal
+
+# Rider & VS project files
+.idea/
+.vscode/
 .vs/
+
+# Visual Studio specific
+*.user
+*.suo
+
+# Auto-generated project files
+*.FileListAbsolute.txt
+*.AssemblyInfo.cs
+*.props
+
+# EF Core Migrations (optional - remove if you want to keep migrations in version control)
+Migrations/
+
+# OS-specific
+.DS_Store
+Thumbs.db
