@@ -4,6 +4,8 @@ using NextUp.Models;
 using NextUp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+// This ensures environment variables override appsettings
+builder.Configuration.AddEnvironmentVariables();
 var config = builder.Configuration;
 var clientId = config["IGDB_ClientId"];
 var clientSecret = config["IGDB_ClientSecret"];
