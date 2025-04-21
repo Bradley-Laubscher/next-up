@@ -1,30 +1,50 @@
 @model IEnumerable<NextUp.Models.Game>
 
-    <h2>My Game List</h2>
+<h2>My Game Backlog</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Platform</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var game in Model)
-{
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Upcoming Expansions</th>
+            <th>Steam Discount</th>
+            <th>Details</th>
+            <th></th> <!-- For delete button -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in Model)
+        {
             <tr>
                 <td>@game.Title</td>
-                <td>@game.Platform</td>
-                <td>@game.Status</td>
+                <td>@(string.IsNullOrEmpty(game.UpcomingExpansionInfo) ? "None" : game.UpcomingExpansionInfo)</td>
                 <td>
-                    <form asp-controller="Games" asp-action="RemoveFromList" method="post">
-                        <input type="hidden" name="id" value="@game.Id" />
+                    @if (!string.IsNullOrEmpty(game.SteamDiscountInfo))
+                    {
+                        <span class="badge bg-success">@game.SteamDiscountInfo</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Checking...</span>
+                    }
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#details-@game.Id">
+                        View Details
+                    </button>
+                    <div class="collapse mt-2" id="details-@game.Id">
+                        <ul>
+                            <li><strong>Platform:</strong> @game.Platform</li>
+                            <li><strong>Release Date:</strong> @(game.ReleaseDate?.ToString("yyyy-MM-dd") ?? "N/A")</li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <form method="post" asp-action="RemoveFromList" asp-route-id="@game.Id">
                         <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                     </form>
                 </td>
             </tr>
-}
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

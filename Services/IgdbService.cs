@@ -21,9 +21,9 @@ namespace NextUp.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
+        // fetch game being searched for
         public async Task<List<Game>> SearchGamesAsync(string gameTitle)
         {
-            // fetch game being searched for
             if (string.IsNullOrWhiteSpace(gameTitle))
             {
                 return new List<Game>();
@@ -33,17 +33,17 @@ namespace NextUp.Services
             return MapToGames(igdbGames);
         }
 
+        // fetch hyped games coming soon
         public async Task<List<Game>> FetchUpcomingGamesAsync()
         {
-            // fetch hyped games coming soon
             var igdbGames = await FetchGamesAsync("hypes; where first_release_date > " + ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds() +
                 "& hypes != null & hypes > 20; sort first_release_date asc;");
             return MapToGames(igdbGames);
         }
 
+        // fetch newly released games with a total rating > 70
         public async Task<List<Game>> FetchNewReleasesAsync()
         {
-            // fetch newly released games with a total rating > 70
             var igdbGames = await FetchGamesAsync("total_rating; where first_release_date <= " + ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds() +
                 "& total_rating > 70; sort first_release_date desc;");
             return MapToGames(igdbGames);
@@ -83,5 +83,55 @@ namespace NextUp.Services
                 User = new ApplicationUser { Id = userId, UserName = userName } // Set the User object with Id and UserName
             }).ToList();
         }
+
+        public async Task<string?> GetUpcomingUpdateInfoAsync(string gameTitle)
+        {
+            if (string.IsNullOrWhiteSpace(gameTitle))
+                return null;
+
+            var token = await _authService.GetAccessTokenAsync();
+            var clientId = _config["Igdb:ClientId"];
+
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.Add("Client-ID", clientId);
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+
+            // Step 1: Get the main game and its ID
+            var baseGameQuery = $"fields id; search \"{gameTitle}\"; where version_parent = null; limit 1;";
+            var baseGameContent = new StringContent(baseGameQuery, Encoding.UTF8, "text/plain");
+
+            var baseGameResponse = await _httpClient.PostAsync("https://api.igdb.com/v4/games", baseGameContent);
+            baseGameResponse.EnsureSuccessStatusCode();
+            var baseGameJson = await baseGameResponse.Content.ReadAsStringAsync();
+
+            var baseGame = JsonSerializer.Deserialize<List<IgdbGameDto>>(baseGameJson)?.FirstOrDefault();
+            if (baseGame == null) return null;
+
+            // Step 2: Get expansions/DLCs with that ID as version_parent
+            var currentUnixTime = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+            var expansionQuery = $@"
+                fields name, first_release_date; 
+                where version_parent = {baseGame.id} & first_release_date > {currentUnixTime}; 
+                sort first_release_date asc; 
+                limit 1;
+            ";
+            var expansionContent = new StringContent(expansionQuery, Encoding.UTF8, "text/plain");
+
+            var expansionResponse = await _httpClient.PostAsync("https://api.igdb.com/v4/games", expansionContent);
+            expansionResponse.EnsureSuccessStatusCode();
+            var expansionJson = await expansionResponse.Content.ReadAsStringAsync();
+
+            var expansions = JsonSerializer.Deserialize<List<IgdbGameDto>>(expansionJson);
+            var upcomingExpansion = expansions?.FirstOrDefault();
+
+            if (upcomingExpansion != null && upcomingExpansion.first_release_date.HasValue)
+            {
+                var releaseDate = DateTimeOffset.FromUnixTimeSeconds(upcomingExpansion.first_release_date.Value).DateTime;
+                return $"{upcomingExpansion.name} - {releaseDate.ToShortDateString()}";
+            }
+
+            return null;
+        }
+
     }
 }

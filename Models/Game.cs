@@ -20,25 +20,16 @@ namespace NextUp.Models
 
         public DateTime? ReleaseDate { get; set; }
 
-        public GameStatus? Status { get; set; }
+        [NotMapped]
+        public string? UpcomingExpansionInfo { get; set; }
 
-        [Range(1, 10)]
-        public int? Rating { get; set; }
-
-        public string? Review { get; set; }
+        [NotMapped]
+        public string? SteamDiscountInfo { get; set; }
 
         // Foreign key to Identity user
         public required string UserId { get; set; }
 
         [ForeignKey("UserId")]
         public required ApplicationUser User { get; set; }
-    }
-
-    public enum GameStatus
-    {
-        Wishlist,
-        Playing,
-        Completed,
-        Abandoned
     }
 }

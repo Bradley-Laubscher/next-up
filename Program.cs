@@ -23,6 +23,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IgdbAuthService>();
 builder.Services.AddHttpClient<IgdbService>();
+builder.Services.AddHttpClient<SteamService>();
 
 var app = builder.Build();
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using NextUp.Data;
 using NextUp.Models;
 using Microsoft.AspNetCore.Identity;
+using NextUp.Services;
 
 namespace NextUp.Controllers
 {
@@ -12,11 +13,15 @@ namespace NextUp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SteamService _steamService;
+        private readonly IgdbService _igdbService;
 
-        public GamesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public GamesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SteamService steamService, IgdbService igdbService)
         {
             _context = context;
             _userManager = userManager;
+            _steamService = steamService;
+            _igdbService = igdbService;
         }
 
         // GET: My List
@@ -26,6 +31,14 @@ namespace NextUp.Controllers
             var userGames = await _context.Games
                 .Where(g => g.UserId == userId)
                 .ToListAsync();
+
+            // Check for discounts using Steam API
+            var tasks = userGames.Select(async game =>
+            {
+                game.SteamDiscountInfo = await _steamService.GetSteamDiscountInfo(game.Title);
+                game.UpcomingExpansionInfo = await _igdbService.GetUpcomingUpdateInfoAsync(game.Title);
+            });
+            await Task.WhenAll(tasks);
 
             return View(userGames);
         }
