@@ -24,6 +24,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IgdbAuthService>();
 builder.Services.AddHttpClient<IgdbService>();
 builder.Services.AddHttpClient<SteamService>();
+builder.Services.AddHostedService<GameUpdateNotifierService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 

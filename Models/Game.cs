@@ -26,6 +26,9 @@ namespace NextUp.Models
         [NotMapped]
         public string? SteamDiscountInfo { get; set; }
 
+        public string? LastNotifiedDiscount { get; set; }
+        public string? LastNotifiedExpansion { get; set; }
+
         // Foreign key to Identity user
         public required string UserId { get; set; }
 

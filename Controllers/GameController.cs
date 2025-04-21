@@ -39,6 +39,7 @@ namespace NextUp.Controllers
                 game.UpcomingExpansionInfo = await _igdbService.GetUpcomingUpdateInfoAsync(game.Title);
             });
             await Task.WhenAll(tasks);
+            await _context.SaveChangesAsync();
 
             return View(userGames);
         }
