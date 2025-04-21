@@ -6,10 +6,9 @@ EXPOSE 80
 # Use SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["NextUp/NextUp.csproj", "NextUp/"]
-RUN dotnet restore "NextUp/NextUp.csproj"
+COPY ["NextUp.csproj", "."]
+RUN dotnet restore "NextUp.csproj"
 COPY . .
-WORKDIR "/src/NextUp"
 RUN dotnet build "NextUp.csproj" -c Release -o /app/build
 
 FROM build AS publish
