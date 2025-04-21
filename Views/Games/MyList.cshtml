@@ -19,13 +19,17 @@
                 <td>@game.Title</td>
                 <td>@(string.IsNullOrEmpty(game.UpcomingExpansionInfo) ? "None" : game.UpcomingExpansionInfo)</td>
                 <td>
-                    @if (!string.IsNullOrEmpty(game.SteamDiscountInfo))
+                    @if (game.SteamDiscountInfo == null)
                     {
-                        <span class="badge bg-success">@game.SteamDiscountInfo</span>
+                        <span class="text-muted">Checking...</span>
+                    }
+                    else if (string.IsNullOrWhiteSpace(game.SteamDiscountInfo))
+                    {
+                        <span class="text-muted">No discount available</span>
                     }
                     else
                     {
-                        <span class="text-muted">Checking...</span>
+                        <span class="badge bg-success">@game.SteamDiscountInfo</span>
                     }
                 </td>
                 <td>

@@ -35,7 +35,7 @@ namespace NextUp.Controllers
             // Check for discounts using Steam API
             var tasks = userGames.Select(async game =>
             {
-                game.SteamDiscountInfo = await _steamService.GetSteamDiscountInfo(game.Title);
+                game.SteamDiscountInfo = await _steamService.GetSteamDiscountInfo(game.Title) ?? "";
                 game.UpcomingExpansionInfo = await _igdbService.GetUpcomingUpdateInfoAsync(game.Title);
             });
             await Task.WhenAll(tasks);

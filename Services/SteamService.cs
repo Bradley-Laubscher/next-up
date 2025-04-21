@@ -16,16 +16,27 @@ public class SteamService
         if (!response.IsSuccessStatusCode) return null;
 
         var json = await response.Content.ReadAsStringAsync();
-        var data = JsonDocument.Parse(json);
+        using var data = JsonDocument.Parse(json);
 
         var firstItem = data.RootElement.GetProperty("items").EnumerateArray().FirstOrDefault();
-        if (firstItem.ValueKind != JsonValueKind.Undefined && firstItem.TryGetProperty("discount_percent", out var discount))
+        if (firstItem.ValueKind == JsonValueKind.Undefined) return "No discount available";
+
+        if (firstItem.TryGetProperty("price", out var price))
         {
-            return discount.GetInt32() > 0
-                ? $"{discount.GetInt32()}% off"
-                : "No discount";
+            var initial = price.GetProperty("initial").GetInt32();
+            var final = price.GetProperty("final").GetInt32();
+
+            if (initial > final)
+            {
+                var discountPercent = 100 - (final * 100 / initial);
+                return $"{discountPercent}% off - ${final / 100.0:F2}";
+            }
+            else
+            {
+                return "No discount available";
+            }
         }
 
-        return null;
+        return "No discount available";
     }
 }
