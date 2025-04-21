@@ -20,7 +20,7 @@ namespace NextUp.Controllers
         }
 
         // GET: My List
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> MyList()
         {
             var userId = _context.Users.First(u => u.UserName == User.Identity.Name).Id;
             var userGames = await _context.Games
@@ -28,31 +28,6 @@ namespace NextUp.Controllers
                 .ToListAsync();
 
             return View(userGames);
-        }
-
-        // GET: Add a game manually
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Add a game manually
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Game game)
-        {
-            if (ModelState.IsValid)
-            {
-                var userId = _context.Users.First(u => u.UserName == User.Identity.Name).Id;
-                game.UserId = userId;
-
-                _context.Add(game);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(game);
         }
 
         // POST: Add a game from IGDB to "My List"
@@ -87,7 +62,21 @@ namespace NextUp.Controllers
             await _context.SaveChangesAsync();
 
             TempData["Message"] = $"{game.Title} has been added to your list.";
-            return RedirectToAction("Index", "Games");
+            return RedirectToAction("MyList", "Games");
+        }
+
+        // POST: Remove a game from "My List"
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromList(int id)
+        {
+            var game = await _context.Games.FindAsync(id);
+            if (game != null)
+            {
+                _context.Games.Remove(game);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("MyList");
         }
     }
 }

@@ -1,6 +1,6 @@
 @model IEnumerable<NextUp.Models.Game>
 
-    <h2>My Game Backlog</h2>
+    <h2>My Game List</h2>
 
     <table class="table">
         <thead>
@@ -18,9 +18,13 @@
                 <td>@game.Title</td>
                 <td>@game.Platform</td>
                 <td>@game.Status</td>
+                <td>
+                    <form asp-controller="Games" asp-action="RemoveFromList" method="post">
+                        <input type="hidden" name="id" value="@game.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </td>
             </tr>
 }
         </tbody>
     </table>
-
-    <a href="/Games/Create" class="btn btn-primary">Add New Game</a>
