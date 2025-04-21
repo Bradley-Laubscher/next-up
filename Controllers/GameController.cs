@@ -59,6 +59,15 @@ namespace NextUp.Controllers
             var userId = user.Id;
             game.UserId = userId;
 
+            // Render requires release date to be in UTC
+            if (game.ReleaseDate.HasValue)
+            {
+                var date = game.ReleaseDate.Value;
+                game.ReleaseDate = date.Kind == DateTimeKind.Unspecified
+                    ? DateTime.SpecifyKind(date, DateTimeKind.Utc)
+                    : date.ToUniversalTime();
+            }
+
             // Check if this game already exists in the user's list
             bool gameExists = await _context.Games.AnyAsync(g =>
                 g.Title == game.Title &&
@@ -71,7 +80,7 @@ namespace NextUp.Controllers
                 TempData["Message"] = "This game is already in your list.";
                 return RedirectToAction("Index", "Home");
             }
-            
+
             _context.Games.Add(game);
             await _context.SaveChangesAsync();
 
