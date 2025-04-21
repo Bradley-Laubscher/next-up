@@ -10,6 +10,11 @@
     max-width: 1200px;
 }
 
+.search-results-section {
+    background-color: #e3f2fd;
+    border: 1px solid #90caf9;
+}
+
 .new-releases-section {
     background-color: #e9f7ef;
     border: 1px solid #b8e0c5;
