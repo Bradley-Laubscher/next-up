@@ -5,8 +5,8 @@ using NextUp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
-var clientId = config["IGDB:ClientId"];
-var clientSecret = config["IGDB:ClientSecret"];
+var clientId = config["IGDB_ClientId"];
+var clientSecret = config["IGDB_ClientSecret"];
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

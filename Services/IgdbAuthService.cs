@@ -23,8 +23,8 @@ namespace NextUp.Services
                 return _accessToken;
             }
 
-            var clientId = _config["Igdb:ClientId"];
-            var clientSecret = _config["Igdb:ClientSecret"];
+            var clientId = _config["IGDB_ClientId"];
+            var clientSecret = _config["IGDB_ClientSecret"];
 
             var response = await _httpClient.PostAsync($"https://id.twitch.tv/oauth2/token?client_id={clientId}&client_secret={clientSecret}&grant_type=client_credentials", null);
             response.EnsureSuccessStatusCode();

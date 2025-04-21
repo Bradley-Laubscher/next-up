@@ -52,7 +52,7 @@ namespace NextUp.Services
         private async Task<List<IgdbGameDto>> FetchGamesAsync(string whereClause)
         {
             var token = await _authService.GetAccessTokenAsync();
-            var clientId = _config["Igdb:ClientId"];
+            var clientId = _config["IGDB_ClientId"];
 
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Add("Client-ID", clientId);
@@ -90,7 +90,7 @@ namespace NextUp.Services
                 return null;
 
             var token = await _authService.GetAccessTokenAsync();
-            var clientId = _config["Igdb:ClientId"];
+            var clientId = _config["IGDB_ClientId"];
 
             _httpClient.DefaultRequestHeaders.Clear();
             _httpClient.DefaultRequestHeaders.Add("Client-ID", clientId);
