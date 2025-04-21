@@ -33,16 +33,20 @@
                     }
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#details-@game.Id">
-                        View Details
-                    </button>
-                    <div class="collapse mt-2" id="details-@game.Id">
-                        <ul>
+                    <button type="button"
+                        class="btn btn-sm btn-primary"
+                        data-bs-toggle="popover"
+                        data-bs-html="true"
+                        title="Game Details"
+                        data-bs-content='
+                        <ul class="list-unstyled mb-0">
                             <li><strong>Platform:</strong> @game.Platform</li>
                             <li><strong>Release Date:</strong> @(game.ReleaseDate?.ToString("yyyy-MM-dd") ?? "N/A")</li>
-                        </ul>
-                    </div>
+                        </ul>'>
+                        View Details
+                    </button>
                 </td>
+
                 <td>
                     <form method="post" asp-action="RemoveFromList" asp-route-id="@game.Id">
                         <button type="submit" class="btn btn-danger btn-sm">Remove</button>
@@ -52,3 +56,14 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl)
+            });
+        });
+    </script>
+}
