@@ -11,6 +11,16 @@
 </head>
 <body>
     <div class="container mt-4">
+        @if (TempData["Message"] != null)
+        {
+            <section class="section">
+                <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                    @TempData["Message"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </section>
+        }
+
         <!-- Search Bar Section -->
         <section class="section search-bar-section">
             <form class="d-flex" method="get" asp-controller="Home" asp-action="Search">
