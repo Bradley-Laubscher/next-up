@@ -1,0 +1,15 @@
+name: Wake Render App
+
+on:
+  schedule:
+    # Runs every 14 minutes from 6:00 to 15:59 UTC, Monday–Friday
+    - cron: '*/14 6-15 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Render App
+        run: curl -s https://next-up-8qce.onrender.com > /dev/null
