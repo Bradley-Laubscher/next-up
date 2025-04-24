@@ -2,7 +2,7 @@ name: Wake Render App
 
 on:
   schedule:
-    # Runs every 14 minutes from 6:00 to 15:59 UTC, Monday–Friday
+    # Runs every 10 minutes from 6:00 to 15:59 UTC, Monday–Friday
     - cron: '*/10 6-15 * * 1-5'
   workflow_dispatch:
 
