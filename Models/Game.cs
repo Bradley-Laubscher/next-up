@@ -7,7 +7,7 @@ namespace NextUp.Models
     public class Game
     {
         [FirestoreProperty]
-        public int Id { get; set; }
+        public string FirestoreId { get; set; } = string.Empty;
 
         [FirestoreProperty]
         public string Title { get; set; } = string.Empty;

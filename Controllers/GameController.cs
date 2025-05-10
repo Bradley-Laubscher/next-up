@@ -85,7 +85,7 @@ namespace NextUp.Controllers
 
         // POST: Remove a game
         [HttpPost]
-        public async Task<IActionResult> RemoveFromList(int id)
+        public async Task<IActionResult> RemoveFromList(string id)
         {
             var userId = GetUserId();
             if (string.IsNullOrEmpty(userId)) return Unauthorized();

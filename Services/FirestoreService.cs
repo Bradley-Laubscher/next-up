@@ -1,9 +1,9 @@
 ﻿using FirebaseAdmin;
-using Google.Cloud.Firestore;
-using Google.Apis.Auth.OAuth2;
-using NextUp.Models;
-using Google.Cloud.Firestore.V1;
 using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Firestore;
+using Google.Cloud.Firestore.V1;
+using NextUp.Models;
 
 namespace NextUp.Services
 {
@@ -13,7 +13,6 @@ namespace NextUp.Services
 
         public FirestoreService(string projectId, GoogleCredential credential)
         {
-            // Initialize Firebase Firestore using the passed credential
             if (FirebaseApp.DefaultInstance == null)
             {
                 FirebaseApp.Create(new AppOptions
@@ -22,7 +21,6 @@ namespace NextUp.Services
                 });
             }
 
-            // Build Firestore client using the given credential
             var firestoreClient = new FirestoreClientBuilder
             {
                 Credential = credential
@@ -31,73 +29,96 @@ namespace NextUp.Services
             _firestoreDb = FirestoreDb.Create(projectId, firestoreClient);
         }
 
-        // Method to verify Firebase ID token
+        /// <summary>
+        /// Verifies a Firebase ID token and returns the decoded token.
+        /// </summary>
         public async Task<FirebaseToken> VerifyFirebaseTokenAsync(string idToken)
         {
             try
             {
-                // Verifying the Firebase ID token
-                var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
-                return decodedToken; // This now returns a FirebaseToken
+                return await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
             }
             catch (Exception ex)
             {
-                throw new UnauthorizedAccessException("Firebase token verification failed", ex);
+                throw new UnauthorizedAccessException("Firebase token verification failed.", ex);
             }
         }
+
+        /// <summary>
+        /// Retrieves all users from the Firestore 'users' collection.
+        /// </summary>
         public async Task<List<FirestoreUser>> GetAllUsersAsync()
         {
             var usersRef = _firestoreDb.Collection("users");
             var snapshot = await usersRef.GetSnapshotAsync();
-            return snapshot.Documents.Select(d => d.ConvertTo<FirestoreUser>()).ToList();
+
+            return snapshot.Documents
+                .Select(doc => doc.ConvertTo<FirestoreUser>())
+                .ToList();
         }
 
+        /// <summary>
+        /// Updates an existing game in Firestore if it exists.
+        /// </summary>
         public async Task UpdateUserGameAsync(Game game)
         {
             var gamesRef = _firestoreDb.Collection("games");
-            var query = gamesRef.WhereEqualTo("UserId", game.UserId).WhereEqualTo("Id", game.Id);
-            var snapshot = await query.GetSnapshotAsync();
-            var doc = snapshot.Documents.FirstOrDefault();
+            var query = gamesRef
+                .WhereEqualTo("UserId", game.UserId)
+                .WhereEqualTo("Id", game.FirestoreId);
 
-            if (doc != null)
-                await doc.Reference.SetAsync(game);
+            var snapshot = await query.GetSnapshotAsync();
+            var existingDoc = snapshot.Documents.FirstOrDefault();
+
+            if (existingDoc != null)
+            {
+                await existingDoc.Reference.SetAsync(game);
+            }
         }
 
-        // Method to retrieve user games from Firestore
+        /// <summary>
+        /// Retrieves all games for a specific user from Firestore.
+        /// </summary>
         public async Task<List<Game>> GetUserGamesAsync(string userId)
         {
             var gamesRef = _firestoreDb.Collection("games");
             var query = gamesRef.WhereEqualTo("UserId", userId);
             var snapshot = await query.GetSnapshotAsync();
 
-            var userGames = new List<Game>();
-            foreach (var document in snapshot.Documents)
-            {
-                var game = document.ConvertTo<Game>();
-                userGames.Add(game);
-            }
-
-            return userGames;
+            return snapshot.Documents
+                .Select(doc =>
+                {
+                    var game = doc.ConvertTo<Game>();
+                    game.FirestoreId = doc.Id;
+                    return game;
+                })
+                .ToList();
         }
 
-        // Method to add a game to the user's game list
+        /// <summary>
+        /// Adds a new game document to Firestore.
+        /// </summary>
         public async Task AddUserGameAsync(Game game)
         {
             var gameRef = _firestoreDb.Collection("games").Document();
             await gameRef.SetAsync(game);
         }
 
-        // Method to delete a game from the user's game list
-        public async Task DeleteUserGameAsync(string userId, int gameId)
+        /// <summary>
+        /// Deletes a game from Firestore if it belongs to the specified user.
+        /// </summary>
+        public async Task DeleteUserGameAsync(string userId, string firestoreId)
         {
-            var gamesRef = _firestoreDb.Collection("games");
-            var query = gamesRef.WhereEqualTo("UserId", userId).WhereEqualTo("Id", gameId);
-            var snapshot = await query.GetSnapshotAsync();
-            var document = snapshot.Documents.FirstOrDefault();
+            var docRef = _firestoreDb.Collection("games").Document(firestoreId);
+            var snapshot = await docRef.GetSnapshotAsync();
 
-            if (document != null)
+            if (snapshot.Exists)
             {
-                await document.Reference.DeleteAsync();
+                var game = snapshot.ConvertTo<Game>();
+                if (game.UserId == userId)
+                {
+                    await docRef.DeleteAsync();
+                }
             }
         }
     }
