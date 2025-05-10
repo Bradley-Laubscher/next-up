@@ -8,23 +8,40 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Load environment variables
 Env.Load();
-// This ensures environment variables override appsettings
 builder.Configuration.AddEnvironmentVariables();
 var config = builder.Configuration;
 
-// Get sensitive data directly from environment variables
-var firebaseKeyJson = config["FIREBASE_KEY_JSON"];
-if (string.IsNullOrEmpty(firebaseKeyJson))
+// Get FIREBASE_KEY_JSON from environment and decode if base64
+var rawCredentialInput = config["FIREBASE_KEY_JSON"];
+if (string.IsNullOrEmpty(rawCredentialInput))
     throw new Exception("FIREBASE_KEY_JSON is not set in environment variables.");
 
+string firebaseKeyJson;
+if (rawCredentialInput.TrimStart().StartsWith("{"))
+{
+    // Assume it's raw JSON
+    firebaseKeyJson = rawCredentialInput;
+}
+else
+{
+    try
+    {
+        var base64Bytes = Convert.FromBase64String(rawCredentialInput);
+        firebaseKeyJson = System.Text.Encoding.UTF8.GetString(base64Bytes);
+    }
+    catch (FormatException)
+    {
+        throw new Exception("FIREBASE_KEY_JSON is neither valid raw JSON nor a valid base64-encoded string.");
+    }
+}
+
+// Get project ID
 var projectId = config["FIREBASE_PROJECT_ID"];
 if (string.IsNullOrEmpty(projectId))
     throw new Exception("FIREBASE_PROJECT_ID is not set in environment variables.");
 
-// Initialize Firebase app with the credential from environment variable
+// Initialize Firebase
 var credential = GoogleCredential.FromJson(firebaseKeyJson);
-
-// Initialize Firebase app with the credential
 FirebaseApp.Create(new AppOptions
 {
     Credential = credential
@@ -51,7 +68,7 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
