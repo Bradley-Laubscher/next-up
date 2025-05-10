@@ -1,108 +1,96 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using NextUp.Data;
 using NextUp.Models;
-using Microsoft.AspNetCore.Identity;
 using NextUp.Services;
+using System.Security.Claims;
 
 namespace NextUp.Controllers
 {
     [Authorize]
     public class GamesController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly SteamService _steamService;
         private readonly IgdbService _igdbService;
+        private readonly FirestoreService _firestore;
 
-        public GamesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SteamService steamService, IgdbService igdbService)
+        public GamesController(
+            SteamService steamService,
+            IgdbService igdbService,
+            FirestoreService firestore)
         {
-            _context = context;
-            _userManager = userManager;
             _steamService = steamService;
             _igdbService = igdbService;
+            _firestore = firestore;
+        }
+
+        // Helper to get Firebase UID
+        private string GetUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
         // GET: My List
         public async Task<IActionResult> MyList()
         {
-            var userId = _context.Users.First(u => u.UserName == User.Identity.Name).Id;
-            var userGames = await _context.Games
-                .Where(g => g.UserId == userId)
-                .ToListAsync();
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
-            // Check for discounts using Steam API
+            var userGames = await _firestore.GetUserGamesAsync(userId);
+
             var tasks = userGames.Select(async game =>
             {
                 game.SteamDiscountInfo = await _steamService.GetSteamDiscountInfo(game.Title) ?? "";
                 game.UpcomingExpansionInfo = await _igdbService.GetUpcomingUpdateInfoAsync(game.Title);
             });
+
             await Task.WhenAll(tasks);
-            await _context.SaveChangesAsync();
 
             return View(userGames);
         }
 
-        // POST: Add a game from IGDB to "My List"
+        // POST: Add a game to "My List"
         [HttpPost]
         public async Task<IActionResult> AddToList(Game game)
         {
-            if (!User.Identity.IsAuthenticated)
-                return Unauthorized();
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-            var userId = user.Id;
             game.UserId = userId;
 
-            // Check if this game already exists in the user's list
-            bool gameExists = await _context.Games.AnyAsync(g =>
-                g.Title == game.Title &&
-                g.Platform == game.Platform &&
-                g.UserId == userId
-            );
+            if (string.IsNullOrEmpty(game.Platform))
+                game.Platform = "Unknown";
 
-            // Validations
             if (game.ReleaseDate.HasValue)
             {
                 var date = game.ReleaseDate.Value;
-                // Render requires release date to be in UTC
                 game.ReleaseDate = date.Kind == DateTimeKind.Unspecified
                     ? DateTime.SpecifyKind(date, DateTimeKind.Utc)
                     : date.ToUniversalTime();
             }
-            if (string.IsNullOrEmpty(game.Platform))
-            {
-                game.Platform = "Unknown";
-            }
-            if (gameExists)
+
+            var existingGames = await _firestore.GetUserGamesAsync(userId);
+            bool exists = existingGames.Any(g =>
+                g.Title == game.Title && g.Platform == game.Platform);
+
+            if (exists)
             {
                 TempData["Message"] = "This game is already in your list.";
                 return RedirectToAction("Index", "Home");
             }
 
-            _context.Games.Add(game);
-            await _context.SaveChangesAsync();
-
+            await _firestore.AddUserGameAsync(game);
             TempData["Message"] = $"{game.Title} has been added to your list.";
-            return RedirectToAction("MyList", "Games");
+            return RedirectToAction("MyList");
         }
 
-        // POST: Remove a game from "My List"
+        // POST: Remove a game
         [HttpPost]
         public async Task<IActionResult> RemoveFromList(int id)
         {
-            var game = await _context.Games.FindAsync(id);
-            if (game != null)
-            {
-                _context.Games.Remove(game);
-                await _context.SaveChangesAsync();
-            }
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
+            await _firestore.DeleteUserGameAsync(userId, id);
             return RedirectToAction("MyList");
         }
     }

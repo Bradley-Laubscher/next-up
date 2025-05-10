@@ -1,0 +1,46 @@
+﻿.card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+    .table th {
+        background-color: #1a73e8;
+        color: white;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+.badge.bg-success {
+    background-color: #00bfa5 !important;
+    font-size: 0.9rem;
+}
+
+.btn-info.btn-sm {
+    background-color: #00bfa5;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-info.btn-sm:hover {
+        background-color: #009688;
+    }
+
+.btn-danger.btn-sm {
+    transition: background-color 0.3s ease;
+}
+
+    .btn-danger.btn-sm:hover {
+        background-color: #c62828;
+    }

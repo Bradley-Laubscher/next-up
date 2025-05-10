@@ -6,6 +6,7 @@ obj/
 *.pdb
 *.cache
 *.gz
+.env
 
 # Project system
 *.AssemblyInfo.cs

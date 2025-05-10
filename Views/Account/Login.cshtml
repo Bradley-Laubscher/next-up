@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Login / Sign Up";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5" style="max-width: 400px;">
+    <div class="card shadow">
+        <div class="card-body">
+            <h3 id="formTitle" class="text-center mb-4">Sign In</h3>
+
+            <div class="mb-3">
+                <input type="email" id="email" class="form-control" placeholder="Email" required />
+            </div>
+            <div class="mb-3">
+                <input type="password" id="password" class="form-control" placeholder="Password" required />
+            </div>
+            <div class="d-grid mb-3">
+                <button id="submitButton" class="btn btn-primary">Sign In</button>
+            </div>
+
+            <p id="toggleLink" class="text-center">
+                Don’t have an account?
+                <a href="#" id="toggleMode">Sign Up</a>
+            </p>
+
+            <div id="statusMessage" class="text-center mt-4 text-muted"></div>
+
+            <div class="d-grid mt-3">
+                <button onclick="logout()" style="display: none;" class="btn btn-outline-secondary" id="logoutButton">Log out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Firebase v8 scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="~/js/firebaseLogin.js"> </script>
+}

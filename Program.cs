@@ -1,33 +1,53 @@
-using Microsoft.EntityFrameworkCore;
-using NextUp.Data;
-using NextUp.Models;
+using DotNetEnv;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication;
 using NextUp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Load environment variables
+Env.Load();
 // This ensures environment variables override appsettings
 builder.Configuration.AddEnvironmentVariables();
 var config = builder.Configuration;
-var clientId = config["IGDB_ClientId"];
-var clientSecret = config["IGDB_ClientSecret"];
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+// Get sensitive data directly from environment variables
+var firebaseKeyJson = config["FIREBASE_KEY_JSON"];
+if (string.IsNullOrEmpty(firebaseKeyJson))
+    throw new Exception("FIREBASE_KEY_JSON is not set in environment variables.");
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+var projectId = config["FIREBASE_PROJECT_ID"];
+if (string.IsNullOrEmpty(projectId))
+    throw new Exception("FIREBASE_PROJECT_ID is not set in environment variables.");
+
+// Initialize Firebase app with the credential from environment variable
+var credential = GoogleCredential.FromJson(firebaseKeyJson);
+
+// Initialize Firebase app with the credential
+FirebaseApp.Create(new AppOptions
 {
-    options.SignIn.RequireConfirmedAccount = false;
-})
-.AddEntityFrameworkStores<ApplicationDbContext>();
+    Credential = credential
+});
 
+builder.Services.AddAuthentication("Firebase")
+    .AddScheme<AuthenticationSchemeOptions, FirebaseAuthenticationHandler>("Firebase", options => { });
+
+builder.Services.AddAuthorization();
+
+// Register services
+builder.Services.AddSingleton(sp =>
+    new FirestoreService(projectId!, credential)
+);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IgdbAuthService>();
 builder.Services.AddHttpClient<IgdbService>();
 builder.Services.AddHttpClient<SteamService>();
 builder.Services.AddHostedService<GameUpdateNotifierService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -39,7 +59,6 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -47,6 +66,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseMiddleware<FirebaseAuthMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -55,11 +75,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
-
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
-}
 
 app.Run();

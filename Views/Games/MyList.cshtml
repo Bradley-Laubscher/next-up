@@ -1,68 +1,78 @@
 @model IEnumerable<NextUp.Models.Game>
 
-<h2>My Game List</h2>
+@{
+    Layout = "_Layout";
+}
+<link rel="stylesheet" href="~/css/mylist.css" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Upcoming Expansions</th>
-            <th>Steam Discount</th>
-            <th>Details</th>
-            <th></th> <!-- For delete button -->
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var game in Model)
-        {
-            <tr>
-                <td>@game.Title</td>
-                <td>@(string.IsNullOrEmpty(game.UpcomingExpansionInfo) ? "None" : game.UpcomingExpansionInfo)</td>
-                <td>
-                    @if (game.SteamDiscountInfo == null)
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Upcoming Expansions</th>
+                        <th>Steam Discount</th>
+                        <th>Details</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var game in Model)
                     {
-                        <span class="text-muted">Checking...</span>
+                        <tr>
+                            <td>@game.Title</td>
+                            <td>@(string.IsNullOrEmpty(game.UpcomingExpansionInfo) ? "None" : game.UpcomingExpansionInfo)</td>
+                            <td>
+                                @if (game.SteamDiscountInfo == null)
+                                {
+                                    <span class="text-muted">Checking...</span>
+                                }
+                                else if (string.IsNullOrWhiteSpace(game.SteamDiscountInfo))
+                                {
+                                    <span class="text-muted">No discount available</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">@game.SteamDiscountInfo</span>
+                                }
+                            </td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-info btn-sm"
+                                        data-bs-toggle="popover"
+                                        data-bs-html="true"
+                                        title="Game Details"
+                                        data-bs-content='
+                                                <ul class="list-unstyled mb-0">
+                                                    <li><strong>Platform:</strong> @game.Platform</li>
+                                                    <li><strong>Release Date:</strong> @(game.ReleaseDate?.ToString("yyyy-MM-dd") ?? "N/A")</li>
+                                                </ul>
+                                            '>
+                                        View Details
+                                    </button>
+                            </td>
+                            <td>
+                                <form method="post" asp-action="RemoveFromList" asp-route-id="@game.Id">
+                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
                     }
-                    else if (string.IsNullOrWhiteSpace(game.SteamDiscountInfo))
-                    {
-                        <span class="text-muted">No discount available</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-success">@game.SteamDiscountInfo</span>
-                    }
-                </td>
-                <td>
-                    <button type="button"
-                        class="btn btn-sm btn-primary"
-                        data-bs-toggle="popover"
-                        data-bs-html="true"
-                        title="Game Details"
-                        data-bs-content='
-                        <ul class="list-unstyled mb-0">
-                            <li><strong>Platform:</strong> @game.Platform</li>
-                            <li><strong>Release Date:</strong> @(game.ReleaseDate?.ToString("yyyy-MM-dd") ?? "N/A")</li>
-                        </ul>'>
-                        View Details
-                    </button>
-                </td>
-
-                <td>
-                    <form method="post" asp-action="RemoveFromList" asp-route-id="@game.Id">
-                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
             popoverTriggerList.map(function (popoverTriggerEl) {
-                return new bootstrap.Popover(popoverTriggerEl)
+                new bootstrap.Popover(popoverTriggerEl);
             });
         });
     </script>

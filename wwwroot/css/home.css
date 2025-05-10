@@ -1,7 +1,51 @@
 ﻿body {
-    background-color: #f8f9fa;
     font-family: Arial, sans-serif;
 }
+
+.search-bar-section {
+    display: flex;
+    justify-content: center;
+}
+
+    .search-bar-section form {
+        display: flex;
+        max-width: 600px;
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-bar-section input[type="search"] {
+        flex: 1;
+        padding: 0.5rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-family: 'Montserrat', sans-serif;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+        .search-bar-section input[type="search"]:focus {
+            border-color: #1a73e8;
+        }
+
+    .search-bar-section button {
+        padding: 0.5rem 1.2rem;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .search-bar-section button:hover {
+            background-color: #1558b0;
+        }
 
 .section {
     margin: 2rem auto;
@@ -10,26 +54,30 @@
     max-width: 1200px;
 }
 
-.search-results-section {
-    background-color: #e3f2fd;
-    border: 1px solid #90caf9;
-}
-
-.new-releases-section {
-    background-color: #e9f7ef;
-    border: 1px solid #b8e0c5;
-}
-
-.coming-soon-section {
-    background-color: #fff4e1;
-    border: 1px solid #f7b96a;
-}
-
 .section-title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 0.3rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search-results-section .section-title {
+    color: #00bfa5;
+    border-bottom: 2px solid #00bfa5;
+}
+
+.new-releases-section .section-title {
+    color: #1a73e8;
+    border-bottom: 2px solid #1a73e8;
+}
+
+.coming-soon-section .section-title {
+    color: #9c27b0;
+    border-bottom: 2px solid #9c27b0;
 }
 
 .game-grid {

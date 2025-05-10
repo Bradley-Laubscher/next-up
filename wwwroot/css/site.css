@@ -2,6 +2,54 @@ html {
   font-size: 14px;
 }
 
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevent page scroll */
+    background-image: url('/Images/background.png');
+    background-size: cover;
+    background-position: center;
+    color: #f5f5f5;
+}
+
+.content {
+    flex-grow: 1;
+    overflow-y: auto; /* Allow scroll here */
+    height: calc(100vh - 56px - 60px); /* Subtract navbar + footer height */
+    padding-top: 56px; /* Adjust if navbar height changes */
+}
+
+.content main {
+    padding: 1rem;
+}
+
+.games-container {
+    position: relative;
+    z-index: 10; /* Ensure they appear on top */
+}
+
+/* Container for the snake, move it behind all other content */
+.snake-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* Snake stays in the back */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.snake-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom right, #88ffcc, #33cc99);
+    box-shadow: 0 0 8px rgba(0, 255, 180, 0.5);
+    transition: background-color 0.3s;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;

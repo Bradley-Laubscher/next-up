@@ -1,38 +1,48 @@
-using System.ComponentModel.DataAnnotations;
+using Google.Cloud.Firestore;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NextUp.Models
 {
+    [FirestoreData]
     public class Game
     {
+        [FirestoreProperty]
         public int Id { get; set; }
 
-        [Required]
-        public required string Title { get; set; }
+        [FirestoreProperty]
+        public string Title { get; set; } = string.Empty;
 
-        public required string CoverImageUrl { get; set; }
+        [FirestoreProperty]
+        public string CoverImageUrl { get; set; } = string.Empty;
 
-        public required string Platform { get; set; }
+        [FirestoreProperty]
+        public string Platform { get; set; } = string.Empty;
 
+        [FirestoreProperty]
         public string? Genre { get; set; }
 
+        [FirestoreProperty]
         public string? Description { get; set; }
 
+        [FirestoreProperty]
         public DateTime? ReleaseDate { get; set; }
 
-        [NotMapped]
+        [FirestoreProperty]
         public string? UpcomingExpansionInfo { get; set; }
 
-        [NotMapped]
+        [FirestoreProperty]
         public string? SteamDiscountInfo { get; set; }
 
+        [FirestoreProperty]
         public string? LastNotifiedDiscount { get; set; }
+
+        [FirestoreProperty]
         public string? LastNotifiedExpansion { get; set; }
 
-        // Foreign key to Identity user
-        public required string UserId { get; set; }
+        [FirestoreProperty]
+        public string UserId { get; set; } = string.Empty;
 
-        [ForeignKey("UserId")]
-        public required ApplicationUser User { get; set; }
+        [FirestoreProperty]
+        public ApplicationUser User { get; set; } = default!;
     }
 }
