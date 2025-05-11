@@ -45,9 +45,8 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: linear-gradient(to bottom right, #88ffcc, #33cc99);
     box-shadow: 0 0 8px rgba(0, 255, 180, 0.5);
-    transition: background-color 0.3s;
+    transition: background-color 0.1s;
 }
 
 @media (min-width: 768px) {

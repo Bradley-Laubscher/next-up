@@ -2,10 +2,10 @@
     const container = document.querySelector('.snake-container');
     if (!container) return;
 
-    const snakeSize = 20;
-    const dotCount = 40;
+    const snakeSize = 80;
+    const dotCount = 100;
     const speed = 2;
-    const spacing = 6;
+    const spacing = 10;
 
     const containerWidth = container.offsetWidth;
     const containerHeight = container.offsetHeight;

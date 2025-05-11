@@ -22,9 +22,13 @@
         });
     };
 
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
         const welcomeMsg = document.getElementById('welcomeMsg');
         if (user) {
+            // Force refresh to ensure we always have a fresh token
+            const token = await user.getIdToken(true);
+            document.cookie = `token=${token}; path=/;`;
+
             document.getElementById('loginButton').classList.add('d-none');
             document.getElementById('logoutButton').classList.remove('d-none');
             welcomeMsg.classList.remove('d-none');

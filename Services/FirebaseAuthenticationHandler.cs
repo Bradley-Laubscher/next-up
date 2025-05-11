@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using FirebaseAdmin.Auth;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
+using System.Security.Claims;
 using System.Text.Encodings.Web;
 
 namespace NextUp.Services
@@ -12,15 +14,35 @@ namespace NextUp.Services
             UrlEncoder encoder,
             ISystemClock clock) : base(options, logger, encoder, clock) { }
 
-        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
+        protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            if (Context.User?.Identity?.IsAuthenticated ?? false)
+            var token = Context.Request.Cookies["token"];
+
+            if (string.IsNullOrEmpty(token))
             {
-                var ticket = new AuthenticationTicket(Context.User, Scheme.Name);
-                return Task.FromResult(AuthenticateResult.Success(ticket));
+                return AuthenticateResult.Fail("No Firebase token found.");
             }
 
-            return Task.FromResult(AuthenticateResult.Fail("Unauthenticated"));
+            try
+            {
+                var firebaseToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(token);
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, firebaseToken.Uid),
+                    new Claim(ClaimTypes.Name, firebaseToken.Claims.ContainsKey("name") ? firebaseToken.Claims["name"].ToString() : firebaseToken.Uid),
+                    new Claim(ClaimTypes.Email, firebaseToken.Claims.ContainsKey("email") ? firebaseToken.Claims["email"].ToString() : "")
+                };
+
+                var identity = new ClaimsIdentity(claims, Scheme.Name);
+                var principal = new ClaimsPrincipal(identity);
+                var ticket = new AuthenticationTicket(principal, Scheme.Name);
+
+                return AuthenticateResult.Success(ticket);
+            }
+            catch (Exception ex)
+            {
+                return AuthenticateResult.Fail($"Firebase token validation failed: {ex.Message}");
+            }
         }
     }
 }
