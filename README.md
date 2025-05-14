@@ -4,7 +4,7 @@ Next Up is a .NET 9 MVC web application designed to help gamers track new releas
 
 ## 🌐 Live Demo
 
-Deployed on [Render](https://next-up-8qce.onrender.com/). Note that free-tier apps can spin down when idle, but GitHub Actions are used to keep the app warm during business hours.
+[NextUp](https://next-up-8qce.onrender.com/). Note that free-tier apps deployed on Render can spin down when idle, but GitHub Actions are used to keep the app warm during business hours.
 
 ---
 
@@ -21,10 +21,10 @@ Deployed on [Render](https://next-up-8qce.onrender.com/). Note that free-tier ap
 ## 🛠️ Tech Stack
 
 - **Framework:** .NET 9 (ASP.NET Core MVC + Razor Pages)
-- **Database:** PostgreSQL (via Npgsql)
+- **Database:** Firebase Firestore
 - **ORM:** Entity Framework Core
 - **Auth:** ASP.NET Core Identity
-- **Frontend:** Razor Views + Bootstrap (optional)
+- **Frontend:** Razor Views + Bootstrap
 - **APIs:** IGDB, Steam Store
 - **Hosting:** Render
 - **Background Jobs:** GitHub Actions (pinging for warm-up)
